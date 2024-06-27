@@ -3,9 +3,12 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import CoordinatorRegistration from './components/CoordinatorRegistration';
 import SchoolRegistration from './components/SchoolRegistration';
 import StudentRegistration from './components/StudentRegistration';
-import StateDistrictSelection from './components/StateDistrictSelection';
-import RegistrationNumberGeneration from './components/RegistrationNumberGeneration';
+import Login from './components/auth/Login';
+import CoordinatorPanel from './components/auth/CoordinatorPanel';
+import AdminPanel from './components/auth/AdminPanel';
 import Navbar from './components/Navbar';
+import { AuthProvider } from './components/auth/AuthContext';
+import PrivateRoute from './components/auth/PrivateRoute';
 
 function App() {
   return (
@@ -13,14 +16,17 @@ function App() {
       <div className="App">
         <Navbar />
         <div className="container mx-auto p-4">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/coordinator-registration" element={<CoordinatorRegistration />} />
-            <Route path="/school-registration" element={<SchoolRegistration />} />
-            <Route path="/student-registration" element={<StudentRegistration />} />
-            <Route path="/state-district-selection" element={<StateDistrictSelection />} />
-            <Route path="/registration-number-generation" element={<RegistrationNumberGeneration />} />
-          </Routes>
+          <AuthProvider>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/coordinator-registration" element={<CoordinatorRegistration />} />
+              <Route path="/school-registration" element={<SchoolRegistration />} />
+              <Route path="/student-registration" element={<StudentRegistration />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='/coordinator-panel' element={<PrivateRoute element={<CoordinatorPanel />} requiredRole="coordinator" />} />
+              <Route path='/admin-panel' element={<PrivateRoute element={<AdminPanel />} requiredRole="admin" />} />
+            </Routes>
+          </AuthProvider>
         </div>
       </div>
     </Router>

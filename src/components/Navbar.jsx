@@ -74,12 +74,19 @@ const Navbar = () => {
                 Student Registration
               </Link>
               <Link
+                to="/login"
+                onClick={toggleMenu}
+                className="text-gray-300 hover:text-white"
+              >
+                Login
+              </Link>
+              {/* <Link
                 to="/state-district-selection"
                 onClick={toggleMenu}
                 className="text-gray-300 hover:text-white"
               >
                 State-District Selection
-              </Link>
+              </Link> */}
             </div>
           </div>
         )}
@@ -107,11 +114,17 @@ const Navbar = () => {
             Student Registration
           </Link>
           <Link
+            to="/login"
+            className="text-gray-300 hover:text-white"
+          >
+            Login
+          </Link>
+          {/* <Link
             to="/state-district-selection"
             className="text-gray-300 hover:text-white"
           >
             State-District Selection
-          </Link>
+          </Link> */}
         </div>
       </div>
     </nav>
